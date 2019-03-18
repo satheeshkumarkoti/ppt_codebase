@@ -1,0 +1,33 @@
+<!-- <app-navigation></app-navigation> -->
+<mat-toolbar class="header">
+  <mat-toolbar-row fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start center">
+    <div>
+      <mat-icon 
+      (click)="drawer.toggle();" 
+      class="menu-div-selected"
+      aria-label="Side nav toggle icon">menu</mat-icon>      
+    </div>
+    <div class="logo-div">
+      <span><img class="image" src="./assets/icon-i-logo-svg-data.svg"></span>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" opened role="navigation" class="side-nav">
+    <mat-nav-list>
+      <a mat-list-item routerLink='/proplan' class="list-item" [routerLinkActive]="['is-active']">
+        <mat-icon class="icon">explore</mat-icon>Project</a>
+      <a mat-list-item routerLink='/admin' class="list-item" [routerLinkActive]="['is-active']">
+        <mat-icon class="icon">accessibility</mat-icon>Admin</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="example-content">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-toolbar class="footer" fxLayoutAlign="space-around">
+  <div>Vehicle Dynamics | Version: 0.2</div>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="end">
+    <a>Environment: Dev</a>
+  </div>
+</mat-toolbar>

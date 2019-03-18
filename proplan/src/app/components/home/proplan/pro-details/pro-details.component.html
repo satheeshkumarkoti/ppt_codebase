@@ -1,0 +1,42 @@
+<div class="form-heading" fxLayout="row" fxLayoutAlign="start center">
+  <mat-icon class="icon">explore</mat-icon>
+  <div>Project Details</div>
+</div>
+<form class="form" [formGroup]="projectForm" fxLayout="column">
+  <mat-form-field>
+    <input matInput placeholder="Project ID" formControlName="projectId" disabled required>
+  </mat-form-field> 
+  <mat-form-field>
+    <input matInput placeholder="Project Name" formControlName="projectName">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Customer" formControlName="customer" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="System" formControlName="system">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="MKS Project Id" formControlName="mksProjectId">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="SWPM" formControlName="swpm" required>
+  </mat-form-field>
+  <div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center">
+    <button mat-button (click)="editProject()" class="btn" [disabled]="!projectForm.valid">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon class="icon">edit</mat-icon> Edit
+      </div>
+    </button>
+    <button mat-button (click)="deleteProject()" class="btn">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon class="icon">delete</mat-icon> Delete
+      </div>
+    </button>
+    <button mat-button (click)="openDialog('add')" class="btn">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon class="icon">assignment</mat-icon> Checklist
+      </div>
+    </button>
+  </div>
+</form>
+

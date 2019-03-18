@@ -1,0 +1,50 @@
+.container{
+  width: 80%;
+}
+.card{
+  width: 300px;
+}
+.mat-sort-header-container {
+  align-items: center;
+}
+.mat-table {
+ width: 100%;
+ margin: 20px auto;
+ padding: 15px;
+ cursor: pointer;
+}
+.mat-header-cell {
+  font-size: 15px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border-left-color: black;
+  align-content: center;
+}
+
+.mat-cell {
+  flex: 0 0 30%;
+  font-size: 15px;
+  padding: 10px;
+}
+.mat-column-Actions {
+  flex: 0 0 100px !important;
+  white-space: unset !important;
+}
+.calPadding{
+  padding: 5px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+  align-self: auto;
+}
+
+.action-menu {
+  padding: 20px;  
+   .btn {
+     background-color: #ffa500;
+     .icon {
+      // font-size: 40px;
+      
+     }
+   }
+}
