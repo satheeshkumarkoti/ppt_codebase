@@ -1,0 +1,7 @@
+{
+  "name": "projectplanningtool",
+  "description": "services application for projectplanningtool apps",
+  "repository": "https://github.com/sriharipr/templestepsservices",
+  "image":"heroku/nodejs"
+
+}
