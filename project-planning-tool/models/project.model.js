@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
+const StartupChecklist = require('./startupchecklist.model.js');
+const Schema = mongoose.Schema;
 
 const ProjectSchema = mongoose.Schema({
-
-
   projectId:{
     type: Number,
     required:[true,'This is mandatory'],
@@ -25,9 +25,17 @@ const ProjectSchema = mongoose.Schema({
     type: String    
   },
   mlc: {
-    type: Number,
-    required:[true,'This is mandatory']
+    type: Number
+   // required:[true,'This is mandatory']
   },
+  // startupChecklist: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'StartupChecklist'
+  // },
+  startupChecklist: {
+    type: Schema.Types.Mixed
+  },
+  // other checklist as mixed
   active: {
     type: String,
     default: true

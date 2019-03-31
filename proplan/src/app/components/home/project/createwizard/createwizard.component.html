@@ -1,11 +1,15 @@
+<div class="form-heading" fxLayout="row" fxLayoutAlign="start center">
+  <mat-icon class="icon">explore</mat-icon>
+  <div>Create a Project</div>
+</div>
 <mat-horizontal-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
+  <mat-step label="projectInfo">
     <ng-template matStepLabel>Project</ng-template>
-    <app-projectinfo></app-projectinfo>
+    <app-projectinfo (projectFormDataSaved)="setProjectInfo($event)"></app-projectinfo>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
+  <mat-step label="startupInfo">
     <ng-template matStepLabel>Startup Phase</ng-template>
-    <app-startup></app-startup>
+    <app-startup (startupDataSaved)="setStartupData($event)"></app-startup>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>

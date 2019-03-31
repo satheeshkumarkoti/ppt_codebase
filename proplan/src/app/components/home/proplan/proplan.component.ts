@@ -48,7 +48,7 @@ export class ProplanComponent implements OnInit {
   }
 
   public showProjectDetails(row) {
-    console.log(row);
+    // console.log(row);
     const dialogRef = this.dialog.open(ProDetailsComponent, {
       width: '1000px',
       height: '800px',
