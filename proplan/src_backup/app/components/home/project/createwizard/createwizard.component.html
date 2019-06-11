@@ -1,0 +1,22 @@
+<div class="form-heading" fxLayout="row" fxLayoutAlign="start center">
+  <mat-icon class="icon">explore</mat-icon>
+  <div>Create a Project</div>
+</div>
+<mat-horizontal-stepper [linear]="true" #stepper>
+  <mat-step label="projectInfo">
+    <ng-template matStepLabel>Project</ng-template>
+    <app-projectinfo (projectFormDataSaved)="setProjectInfo($event)"></app-projectinfo>
+  </mat-step>
+  <mat-step label="startupInfo">
+    <ng-template matStepLabel>Startup Phase</ng-template>
+    <app-startup (startupDataSaved)="setStartupData($event)"></app-startup>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

@@ -17,13 +17,13 @@ export class StartupComponent implements OnInit {
 
   public startupForm = new FormGroup({
     masterPlanDueDate:  new FormControl(''),
-    masterPlanCompleted: new FormControl(true),
-    softwareFunctionListAvailable: new FormControl(true),
-    softwareFunctionListDueDate: new FormControl('')
-    // systemDefinitionAvailable:  new FormControl(true),
-    // softwareDefinitionDueDate: new FormControl(''),
-    // vdsAvailable: new FormControl(true),
-    // vdsDueDate: new FormControl(''),
+    masterPlanCompleted: new FormControl(),    
+    softwareFunctionListDueDate: new FormControl(''),
+    softwareFunctionListAvailable: new FormControl(),
+    softwareDefinitionDueDate: new FormControl(''),
+    systemDefinitionAvailable:  new FormControl(),
+    vdsDueDate: new FormControl(''),
+    vdsAvailable: new FormControl()
     // teamMembersAvailable: new FormControl(true),
     // teamMembersDueDate: new FormControl(''),
     // dgDQNumbersAvailable: new FormControl(true),
@@ -63,55 +63,7 @@ export class StartupComponent implements OnInit {
     // identifyTheCFLAvailable: new FormControl(true),
     // identifyTheCFLDueDate: new FormControl('')
 
-/*
-masterPlanDueDate: new Date(),
-masterPlanCompleted: true,
-softwareFunctionListAvailable: true,
-softwareFunctionListDueDate: new Date(),
-systemDefinitionAvailable: true,
-softwareDefinitionDueDate: new Date(),
-vdsAvailable: true,
-vdsDueDate: new Date(),
-teamMembersAvailable: true,
-teamMembersDueDate: new Date(),
-dgDQNumbersAvailable: true,
-dgDQNumbersDueDate: new Date(),
-schedulePreparationAvailable: true,
-schedulePreparationDueDate: new Date(),
-newProjectIdAvailable: true,
-newProjectIdDueDate: new Date(),
-resourceEstimationAvailable: true,
-resourceEstimationDueDate: new Date(),
-mks1ProjectIdAvailable: true,
-mks1ProjectIdDueDate: new Date(),
-mks3ProjectFolderAvailable: true,
-mks3ProjectFolderDueDate: new Date(),
-mks3ProjectSheetAvailable: true,
-mks3ProjectSheetDueDate: new Date(),
-newParameterSetAvailable: true,
-newParameterSetDueDate: new Date(),
-newConfigurationSetAvailable: true,
-newConfigurationSetDueDate: new Date(),
-newEepromLayoutAvailable: true,
-newEepromLayoutDueDate: new Date(),
-softwareStatusAvailable: true,
-softwareStatusDueDate: new Date(),
-softwareMeetingMinutesAvailable: true,
-softwareMeetingMinutesDueDate: new Date(),
-softwareRiskListAvailable: true,
-softwareRiskListDueDate: new Date(),
-scheduleSoftwareKickoffAvailable: true,
-scheduleSoftwareKickoffDueDate: new Date(),
-reviewConfigurationParameterSetsAvailable: true,
-reviewConfigurationParameterSetsDueDate: new Date(),
-ecuHCUOrderAvailable: true,
-ecuHCUOrderDueDate: new Date(),
-wiringHarnessAvailable: true,
-wiringHarnessDueDate: new Date(),
-identifyTheCFLAvailable: true,
-identifyTheCFLDueDate: new Date()
 
-*/
 
   });
 

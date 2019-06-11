@@ -11,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class ProAddComponent implements OnInit {
   public projectForm = this.fb.group({
-    projectId: ['', Validators.required],
+    // projectId: ['', Validators.required],
     customer: [''],
     projectName: [''],
     system: [''],

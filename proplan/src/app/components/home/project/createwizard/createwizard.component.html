@@ -7,9 +7,13 @@
     <ng-template matStepLabel>Project</ng-template>
     <app-projectinfo (projectFormDataSaved)="setProjectInfo($event)"></app-projectinfo>
   </mat-step>
-  <mat-step label="startupInfo">
+  <!-- <mat-step label="startupInfo">
     <ng-template matStepLabel>Startup Phase</ng-template>
     <app-startup (startupDataSaved)="setStartupData($event)"></app-startup>
+  </mat-step>
+  <mat-step label="reqFreezePhase">
+      <ng-template matStepLabel>Requirement Freeze Phase</ng-template>
+      <app-reqfreezephase (reqFreezePhaseDataSaved)="setReqFreezePhaseData($event)"></app-reqfreezephase>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
@@ -18,5 +22,5 @@
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button (click)="stepper.reset()">Reset</button>
     </div>
-  </mat-step>
+  </mat-step> -->
 </mat-horizontal-stepper>

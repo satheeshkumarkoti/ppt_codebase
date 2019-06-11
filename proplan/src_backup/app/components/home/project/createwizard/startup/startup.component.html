@@ -1,0 +1,19 @@
+<form class="form" [formGroup]="startupForm" fxLayout="column">
+  <mat-form-field>
+    <input matInput placeholder="Master Plan Due Date" formControlName="masterPlanDueDate" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="masterPlanCompleted" formControlName="masterPlanCompleted" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="softwareFunctionListAvailable" formControlName="softwareFunctionListAvailable" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="softwareFunctionListDueDate" formControlName="softwareFunctionListDueDate">
+  </mat-form-field>
+  
+  <div>
+    <button mat-button (click)="onSubmit()"  matStepperNext>Next</button>
+  </div>
+ 
+</form>

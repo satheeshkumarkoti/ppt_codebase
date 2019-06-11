@@ -39,12 +39,41 @@ th.mat-sort-header-sorted {
 }
 
 .action-menu {
-  padding: 20px;  
+  padding: 20px;
    .btn {
      background-color: #ffa500;
      .icon {
       // font-size: 40px;
-      
+
      }
    }
 }
+
+.release-details {
+  padding: 10px 15px;
+}
+.panelborder{
+  border : 1px solid  #1565C0;
+}
+
+.header {
+  background-color: #337ab7!important;;
+  height: 40px  !important;
+  padding: 5  !important;
+}
+
+.h4fontcolor {
+  color: white;
+  font-family : inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  box-sizing: border-box;
+  display: block;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  }

@@ -1,11 +1,198 @@
 <div class="form-heading" fxLayout="row" fxLayoutAlign="start center">
   <mat-icon class="icon">explore</mat-icon>
-  <div>Project Details</div>
+  <div>Checklists Of {{mlc}}</div>
 </div>
-<form class="form" [formGroup]="projectForm" fxLayout="column">
-  <mat-form-field>
-    <input matInput placeholder="Project ID" formControlName="projectId" disabled required>
-  </mat-form-field> 
+
+<mat-accordion class="form">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Startup Checklist
+      </mat-panel-title>
+      <!-- <mat-panel-description>
+        Type your name and age
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    <div>
+      <div>
+        <div><h5>Availblity of Master Project Plan</h5></div>
+        <div>{{startupChecklist?.masterPlanDueDate}}</div>
+      </div>
+      <div>
+        <div><h5>Availblity of Software function list</h5></div>
+        <div>{{startupChecklist?.masterPlanCompleted}}</div>
+      </div>
+      <div>
+        <div><h5>Availblity of System definition</h5></div>
+        <div>{{startupChecklist?.softwareFunctionListAvailable}}</div>
+      </div>
+      <div>
+        <div><h5>Availblity of Vehicle data sheet (VDS)</h5></div>
+        <div>{{startupChecklist?.softwareFunctionListDueDate}}</div>
+      </div>
+      <div>
+        <div><h5>Team members</h5></div>
+        <div>{{startupChecklist?.systemDefinitionAvailable}}</div>
+      </div>
+      <div>
+        <div><h5>Availblity of project DG and DQ numbers for the projects</h5></div>
+        <div>{{startupChecklist?.softwareDefinitionDueDate}}</div>
+      </div>
+      <div>
+        <div><h5>Availblity of project DG and DQ numbers for the projects</h5></div>
+        <div>{{startupChecklist?.vdsAvailable}}</div>
+      </div>
+
+
+
+      <!-- startup checklist table-->
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{mlc}} ReqrementFreeze Checklist
+      </mat-panel-title>
+      <!-- <mat-panel-description>
+        Type your name and age
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    <div>
+      <div>
+        <div><h5>Availability Of Requirement Specification List</h5></div>
+        <div>{{reqFreezeChecklist?.availabilityOfReqSpecificationList}}</div>
+      </div>
+      <!-- checklist table-->
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          {{mlc}} Software Implementation
+      </mat-panel-title>
+      <!-- <mat-panel-description>
+        Type your name and age
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    <div>
+      <div>
+        <div><h5>Software implementation starts with Trunk/Mainline</h5></div>
+        <div>{{swImplementationChecklist?.swImplStartsWithTrunk_Mainline}}</div>
+      </div>
+      <!--  checklist table-->
+    </div>
+  </mat-expansion-panel>
+
+<mat-expansion-panel>
+<mat-expansion-panel-header>
+  <mat-panel-title>
+      Before {{mlc}} Software Pre-Freeze
+  </mat-panel-title>
+  <!-- <mat-panel-description>
+    Type your name and age
+  </mat-panel-description> -->
+</mat-expansion-panel-header>
+<div>
+  <div>
+    <div><h5>Customer parts number check</h5></div>
+    <div>{{beforeSoftwarePreFreezeChecklist?.customerPartsNumberCheck}}</div>
+  </div>
+  <!--  checklist table-->
+</div>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+        Before {{mlc}} SW Freeze
+    </mat-panel-title>
+    <!-- <mat-panel-description>
+      Type your name and age
+    </mat-panel-description> -->
+  </mat-expansion-panel-header>
+  <div>
+    <div>
+      <div><h5>SAFE status check for software freeze</h5></div>
+      <div>{{beforeSWFreezeChecklist?.safeStatusCheckForSoftwareFreeze}}</div>
+    </div>
+      <!-- <mat-table #table [dataSource]="checkListData" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="safeStatusCheckForSoftwareFreeze">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.beforeSWFreezeChecklist?.safeStatusCheckForSoftwareFreeze}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </mat-table>
+    checklist table-->
+  </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Before {{mlc}} SW Release
+      </mat-panel-title>
+      <!-- <mat-panel-description>
+        Type your name and age
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    <div>
+      <div>
+        <div><h5>SAFE status check for software release</h5></div>
+        <div>{{beforeSWReleaseChecklist?.safeStatusCheckForSoftwareRelease}}</div>
+      </div>
+      <div>
+        <div><h5>Final software release version</h5></div>
+        <div>{{beforeSWReleaseChecklist?.finalSoftwareReleaseVersion}}</div>
+      </div>
+      <div>
+        <div><h5>ReleaseSheet/ReleaseSheetASW</h5></div>
+        <div>{{beforeSWReleaseChecklist?.releaseSheet_releaseSheetASW}}</div>
+      </div>
+      <div>
+        <div><h5>CVT / Vehicle test results</h5></div>
+        <div>{{beforeSWReleaseChecklist?.cvt_vehicleTestResults}}</div>
+      </div>
+      <div> <!-- To be work on this -->
+        <div><h5>ReleaseSheet/ReleaseSheetASW</h5></div>
+        <div>{{beforeSWReleaseChecklist?.releaseSheet_releaseSheetASW}}</div>
+      </div>
+      <div>
+        <div><h5>Release agenda file</h5></div>
+        <div>{{beforeSWReleaseChecklist?.releaseAgendaFile}}</div>
+      </div>
+      <!--  checklist table-->
+    </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          After {{mlc}} SW Release
+      </mat-panel-title>
+      <!-- <mat-panel-description>
+        Type your name and age
+      </mat-panel-description> -->
+    </mat-expansion-panel-header>
+    <div>
+      <div>
+        <div><h5>OPP System Phase Definition Sign Off</h5></div>
+        <div>{{afterSWReleaseChecklist?.oppSystemPhaseDefinitionSignOff}}</div>
+      </div>
+      <div>
+          <div><h5>System Release Check List</h5></div>
+          <div>{{afterSWReleaseChecklist?.systemReleaseCheckList}}</div>
+        </div>
+      <!--  checklist table-->
+    </div>
+</mat-expansion-panel>
+
+
+
+</mat-accordion>
+<!-- <form class="form" [formGroup]="projectForm" fxLayout="column">
   <mat-form-field>
     <input matInput placeholder="Project Name" formControlName="projectName">
   </mat-form-field>
@@ -20,6 +207,12 @@
   </mat-form-field>
   <mat-form-field>
     <input matInput placeholder="SWPM" formControlName="swpm" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Project Kickoff Date" formControlName="projectKickoffDate" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Software Kickoff Date" formControlName="softwareKickoffDate" required>
   </mat-form-field>
   <div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center">
     <button mat-button (click)="editProject()" class="btn" [disabled]="!projectForm.valid">
@@ -38,5 +231,5 @@
       </div>
     </button>
   </div>
-</form>
+</form> -->
 

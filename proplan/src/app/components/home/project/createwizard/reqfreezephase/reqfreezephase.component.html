@@ -1,0 +1,12 @@
+<form class="form" [formGroup]="reqFreezePhaseForm" fxLayout="column">
+ <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start end">
+    <mat-form-field> <!--  have to change field name -->
+      <input matInput [matDatepicker]="picker" placeholder="Availability of requirement specification list" formControlName="swImplStartsWithTrunk">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <div>
+      <button mat-button (click)="onSubmit()"  matStepperNext>Next</button>
+  </div>
+</form>

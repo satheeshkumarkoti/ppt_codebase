@@ -1,19 +1,85 @@
 <form class="form" [formGroup]="startupForm" fxLayout="column">
+  <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start end">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Master Plan Due Date" formControlName="masterPlanDueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>   
+
+    <mat-form-field>
+        <mat-label>Master Plan Completed</mat-label>
+        <select matNativeControl formControlName="masterPlanCompleted">
+          <option value="false">False</option>
+          <option value="true">True</option>            
+        </select>
+      </mat-form-field>
+
+    <!-- <mat-form-field>
+        <mat-label>Status</mat-label>
+        <select matNativeControl formControlName="masterPlanCompletedSatus">
+          <option value="open">Open</option>
+          <option value="close">Close</option>            
+          <option value="notapplicable">Not Applicable</option> 
+        </select>
+      </mat-form-field>
+      
+    <mat-form-field>
+        <mat-label>Can be automated</mat-label>
+        <select matNativeControl formControlName="masterPlanCompletedAutomated">
+          <option value="yes">Yes</option>
+          <option value="no">No</option>            
+        </select>
+      </mat-form-field> -->
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker1" placeholder="Software Function List DueDate" formControlName="softwareFunctionListDueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Software Function List Available</mat-label>
+        <select matNativeControl formControlName="softwareFunctionListAvailable">
+            <option value="false">False</option> 
+          <option value="true">True</option>           
+        </select>
+    </mat-form-field>
+</div>
+
+<div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
   <mat-form-field>
-    <input matInput placeholder="Master Plan Due Date" formControlName="masterPlanDueDate" required>
+      <input matInput [matDatepicker]="picker2" placeholder="Software Definition DueDate" formControlName="softwareDefinitionDueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
   </mat-form-field>
+
   <mat-form-field>
-    <input matInput placeholder="masterPlanCompleted" formControlName="masterPlanCompleted" required>
+      <mat-label>Software Definition Available</mat-label>
+      <select matNativeControl formControlName="systemDefinitionAvailable">
+          <option value="false">False</option> 
+        <option value="true">True</option>           
+      </select>
   </mat-form-field>
+</div>
+
+<div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center">
   <mat-form-field>
-    <input matInput placeholder="softwareFunctionListAvailable" formControlName="softwareFunctionListAvailable" required>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="softwareFunctionListDueDate" formControlName="softwareFunctionListDueDate">
-  </mat-form-field>
+      <input matInput [matDatepicker]="picker3" placeholder="VDS DueDate" formControlName="vdsDueDate">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
   
+    <mat-form-field>
+        <mat-label>VDS Available</mat-label>
+        <select matNativeControl formControlName="vdsAvailable">
+          <option value="false">False</option> 
+          <option value="true">True</option>           
+        </select>
+    </mat-form-field>
+  </div>
   <div>
     <button mat-button (click)="onSubmit()"  matStepperNext>Next</button>
   </div>
- 
-</form>
+ </form>

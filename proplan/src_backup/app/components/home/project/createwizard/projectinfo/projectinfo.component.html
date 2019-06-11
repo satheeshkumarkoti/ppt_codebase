@@ -1,0 +1,31 @@
+<form class="form" [formGroup]="projectForm" fxLayout="column">
+  <mat-form-field>
+    <input matInput placeholder="Project ID" formControlName="projectId" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Project Name" formControlName="projectName" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Customer" formControlName="customer" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="System" formControlName="system">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="MKS Project Id" formControlName="mksProjectId">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="SWPM" formControlName="swpm" required>
+  </mat-form-field>
+  <!-- <button mat-button type="submit" [disabled]="!projectForm.valid">Submit</button> -->
+  <div>
+    <button mat-button (click)="onSubmit()"  matStepperNext>Next</button>
+  </div>
+  <!-- <div fxLayout="row" fxLayoutGap="25px" fxLayoutAlign="center center">
+    <button mat-button (click)="onSubmit()" class="btn" [disabled]="!projectForm.valid">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon class="icon">add</mat-icon> Add Project
+      </div>
+    </button>
+  </div> -->
+</form>

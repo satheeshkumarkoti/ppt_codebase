@@ -1,79 +1,221 @@
 <div fxLayout="column" fxLayoutAlign="start space-around" class="container">
-  <!-- <app-project></app-project>     -->
-  <!-- <div fxLayout="row"  fxLayoutGap="30px"
- fxLayoutAlign="start space-around" class="container">
-<mat-card *ngFor="let proj of project" class="card">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{proj.customer}}</mat-card-title>
-    <mat-card-subtitle>{{proj.projectId}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content fxLayout="column">
-    <div>
-      <b>Architecture: </b><b style="color: blue">{{proj.architecture}}</b>     
-    </div>
-    <div>
-        <b>ProjectPhase: </b><b style="color: blue">{{proj.projectPhase}}</b>     
-    </div>
-    <div>
-        <b>Family: </b><b style="color: blue"> {{proj.family}}</b>     
-    </div>    
-    <div>
-        <b>System: </b><b style="color: blue"> {{proj.system}}</b>     
-    </div>
-    <div>
-        <b>MKS ProjectId: </b><b style="color: blue"> {{proj.mksProjectId}}</b>
-    </div>
-    <div>
-      <b>SWPM</b><b style="color: blue"> {{proj.swpm}}</b>
-    </div>
-    <div>
-        <b>Created at: </b><b style="color: blue">{{proj.createdAt}}</b>
-    </div>             
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>View Details</button>
-  </mat-card-actions>
-    </mat-card>
-</div>
-
- -->
-  <div class="action-menu" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="end end">
-    <button mat-button (click)="openDialog('add')" class="btn">
+   <div class="action-menu" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start end">
+    <!-- <button mat-button (click)="openDialog('add')" class="btn">
       <div fxLayout="row" fxLayoutAlign="center center">
         <mat-icon class="icon">add</mat-icon> Add Project
       </div>
+    </button> -->
+
+    <form class="project-search-form"
+      fxLayout="row"
+      fxLayoutGap="50px">
+      <mat-form-field class="form-field">
+        <input
+          type="text"
+          placeholder="Search for a Project"
+          aria-label="Project" matInput
+          [formControl]="myControl"
+          [matAutocomplete]="auto"/>
+        <mat-autocomplete (optionSelected)='getMlcs($event.option.value)'
+        #auto="matAutocomplete">
+            <mat-option
+              *ngFor="let project of projects"
+              [value]="project">
+              {{project}}
+            </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field class="form-field"
+        *ngIf="isMlcsVisible">
+        <!-- <mat-select [(value)]="selectedMlc">
+          <mat-option
+            *ngFor="let selectMlcData of mlcs"
+            [value]="selectMlcData"
+            (onSelectionChange)='dummy($event)'>
+            {{selectMlcData?.releaseType}}
+          </mat-option>
+        </mat-select> -->
+
+
+        <input
+        type="text"
+        placeholder="Select a MLC"
+        aria-label="selectedMlcData" matInput
+        [formControl]="myMlc"
+        [matAutocomplete]="auto"/>
+      <mat-autocomplete (optionSelected)='getMLCData($event.option.id)'
+      #auto="matAutocomplete">
+          <mat-option
+            *ngFor="let selectMlcData of mlcs"
+            [id]="selectMlcData.id"
+            [value]="selectMlcData.releaseType">
+            {{selectMlcData.releaseType}}
+          </mat-option>
+      </mat-autocomplete>
+
+      </mat-form-field>
+      <mat-form-field *ngIf="isDatesVisible">
+        <input matInput [matDatepicker]="picker1" placeholder="Project Kickoff date" [formControl]="pkDate"
+        (dateInput)="changePKDate('input', $event)" (dateChange)="changePKDate('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="isDatesVisible">
+        <input matInput [matDatepicker]="picker2" placeholder="Software Kickoff Date" [formControl]="skDate"
+        (dateInput)="changeSWKDate('input', $event)" (dateChange)="changeSWKDate('change', $event)">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </form>
+
+    <button mat-button class="btn" *ngIf="isDatesVisible" (click)="editProject()">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon class="icon">add</mat-icon>Get Checklist
+      </div>
     </button>
-    
+
+
   </div>
-  <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start space-around" class="container">
-    <mat-table #table [dataSource]="projectsList" matSort class="mat-elevation-z8" (matSortChange)="sortData($event)">
-      <ng-container matColumnDef="projectId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
-        <td mat-cell *matCellDef="let element"> {{element.projectId}} </td>
-      </ng-container>
+<div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
+    <mat-expansion-panel class="panelborder">
+        <mat-expansion-panel-header class="header" >
+          <mat-panel-title>
+              <h4 class="h4fontcolor">Project Startup Phase</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+       <div fxLayout="row" fxLayoutGap="20px">
+            Master Plan DueDate: {{startUpChecklist?.masterPlanDueDate}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Master Plan Completed: {{startUpChecklist?.masterPlanCompleted}}
+        </div>
+    </mat-expansion-panel>
+</div>
+
+<div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
+    <mat-expansion-panel class="panelborder">
+        <mat-expansion-panel-header class="header" >
+          <mat-panel-title>
+              <h4 class="h4fontcolor">Requirement Freeze</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Availability Of Requirement SpecificationList: {{reqFreezeChecklist?.availabilityOfReqSpecificationList}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Availability Creation Of PCDS For CVT Tests: {{reqFreezeChecklist?.availability_CreationOfPCDSForCVTTests}}
+        </div>
+    </mat-expansion-panel>
+</div>
+
+<div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
+    <mat-expansion-panel class="panelborder">
+        <mat-expansion-panel-header class="header" >
+          <mat-panel-title>
+              <h4 class="h4fontcolor">Software Implementation</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Software implementation starts with Trunk/Mainline: {{swImplementationChecklist?.swImplStartsWithTrunk_Mainline}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Creation of devpath for the MLC-xx release: {{swImplementationChecklist?.creationOfDevpathForTheMLC50Release}}
+        </div>
+    </mat-expansion-panel>
+</div>
+
+<div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
+    <mat-expansion-panel class="panelborder">
+        <mat-expansion-panel-header class="header" >
+          <mat-panel-title>
+              <h4 class="h4fontcolor">Before MLC-xx Software Pre-Freeze</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Customer parts number check: {{beforeSWPreFreezeChecklist?.customerPartsNumberCheck}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Global configuration check: {{beforeSWPreFreezeChecklist?.globalConfigurationCheck}}
+        </div>
+    </mat-expansion-panel>
+</div>
+
+<div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
+    <mat-expansion-panel class="panelborder">
+        <mat-expansion-panel-header class="header" >
+          <mat-panel-title>
+              <h4 class="h4fontcolor">Before MLC-xx Software Freeze</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutGap="20px">
+            SAFE status check for software freeze: {{beforeSWFreezeChecklist?.safeStatusCheckForSoftwareFreeze}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Customer drawings, if any: {{beforeSWFreezeChecklist?.customerDrawingsIfAny}}
+        </div>
+    </mat-expansion-panel>
+</div>
+
+<div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
+    <mat-expansion-panel class="panelborder">
+        <mat-expansion-panel-header class="header" >
+          <mat-panel-title>
+              <h4 class="h4fontcolor">Before MLC-xx Software Release</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutGap="20px">
+            SAFE status check for software release: {{beforeSWReleaseChecklist?.safeStatusCheckForSoftwareRelease}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Final software release version: {{beforeSWReleaseChecklist?.finalSoftwareReleaseVersion}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            ReleaseSheet/ReleaseSheetASW: {{beforeSWReleaseChecklist?.releaseSheet_releaseSheetASW}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            CVT / Vehicle test results: {{beforeSWReleaseChecklist?.cvt_vehicleTestResults}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            ReleaseSheet/ReleaseSheetASW: {{beforeSWReleaseChecklist?.releaseSheet_releaseSheetASW}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Release agenda file: {{beforeSWReleaseChecklist?.releaseAgendaFile}}
+        </div>
+    </mat-expansion-panel>
+</div>
+
+<div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
+    <mat-expansion-panel class="panelborder">
+        <mat-expansion-panel-header class="header" >
+          <mat-panel-title>
+              <h4 class="h4fontcolor">After MLC-xx SW Release</h4>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div fxLayout="row" fxLayoutGap="20px">
+            OPP System Phase Definition Sign Off: {{afterSWReleaseChecklist?.oppSystemPhaseDefinitionSignOff}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            Final software release version: {{afterSWReleaseChecklist?.systemReleaseCheckList}}
+        </div>
+    </mat-expansion-panel>
+</div>
+
+
+
+  <!-- <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start space-around" class="container">
+    <mat-table #table [dataSource]="projectsList" matSort class="mat-elevation-z8">
       <ng-container matColumnDef="projectName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</th>
         <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
       </ng-container>
-      <ng-container matColumnDef="customer">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Customer</th>
-        <td mat-cell *matCellDef="let element"> {{element.customer}} </td>
-      </ng-container>  
-      <ng-container matColumnDef="system">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>System</th>
-        <td mat-cell *matCellDef="let element"> {{element.system}} </td>
-      </ng-container>    
-      <ng-container matColumnDef="mksProjectId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>MKSProj-ID</th>
-        <td mat-cell *matCellDef="let element"> {{element.mksProjectId}} </td>
+     <ng-container matColumnDef="releaseType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>MLC</th>
+        <td mat-cell *matCellDef="let element"> {{element.releaseType}} </td>
       </ng-container>
-      <ng-container matColumnDef="swpm">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>SWPM</th>
-        <td mat-cell *matCellDef="let element"> {{element.swpm}} </td>
-      </ng-container>     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showProjectDetails(row)"></tr>
     </mat-table>
-  </div>
+  </div> -->
+
 </div>

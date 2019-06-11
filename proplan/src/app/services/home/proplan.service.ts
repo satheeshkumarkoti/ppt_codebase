@@ -14,9 +14,19 @@ export class ProplanService {
   constructor(private http: HttpClient) { }
 
   public getAllProjects(): Observable<any> {
-    const endPoint = `${AppConfig.SERVICE}allProjects/`;
+    const endPoint = `${AppConfig.SERVICE}getProjectIds/`;
     console.log(endPoint);
     return this.http.get<IProject[]>(endPoint);
+  }
+
+  public getMlcs(projectId: String): Observable<any> {
+    const endPoint = `${AppConfig.SERVICE}getMlcs/${projectId}`;
+    return this.http.get<any[]>(endPoint);
+  }
+
+  public getProject(projectId: any): Observable<any> {
+    const endPoint = `${AppConfig.SERVICE}project/${projectId}`;
+    return this.http.get<any>(endPoint,  httpOptions);
   }
 
   public createProject(projectData: any): Observable<any> {
@@ -30,5 +40,7 @@ export class ProplanService {
     const body = JSON.stringify(projectData);
     return this.http.put<any>(endPoint, body, httpOptions);
   }
+
+
 
 }

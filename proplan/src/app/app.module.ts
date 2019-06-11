@@ -8,8 +8,17 @@ import {
    MatFormFieldModule,
    MatInputModule,
    MatSnackBarModule,
-   MatStepperModule
-} from '@angular/material';
+   MatStepperModule,
+   MatDatepickerModule,
+   MatNativeDateModule,
+   MatSlideToggleModule,
+   MatRadioModule,
+   MatExpansionPanel,
+   MatExpansionModule,
+   MatAccordion,
+   MatSelectModule,
+   MatAutocompleteModule
+   } from '@angular/material';
 import { ProjectComponent } from './components/home/project/project.component';
 import { ProplanComponent } from './components/home/proplan/proplan.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -24,6 +33,8 @@ import { ProDetailsComponent } from './components/home/proplan/pro-details/pro-d
 import { CreatewizardComponent } from './components/home/project/createwizard/createwizard.component';
 import { ProjectinfoComponent } from './components/home/project/createwizard/projectinfo/projectinfo.component';
 import { StartupComponent } from './components/home/project/createwizard/startup/startup.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ReqfreezephaseComponent } from './components/home/project/createwizard/reqfreezephase/reqfreezephase.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +47,8 @@ import { StartupComponent } from './components/home/project/createwizard/startup
     ProDetailsComponent,
     CreatewizardComponent,
     ProjectinfoComponent,
-    StartupComponent
+    StartupComponent,
+    ReqfreezephaseComponent
   ],
   imports: [
     AppRoutingModule,
@@ -54,11 +66,18 @@ import { StartupComponent } from './components/home/project/createwizard/startup
     MatIconModule,
     MatListModule,
     MatDialogModule,
-    ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatSnackBarModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatNativeDateModule,
+    MatSlideToggleModule,
+    MatRadioModule,
+    MatExpansionModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent],
