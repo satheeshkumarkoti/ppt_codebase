@@ -9,6 +9,7 @@ import { ProDetailsComponent } from './pro-details/pro-details.component';
 import { CreatewizardComponent } from '../project/createwizard/createwizard.component';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-proplan',
@@ -48,6 +49,7 @@ export class ProplanComponent implements OnInit {
   // ];
   constructor(private proPlanService: ProplanService,
     public dialog: MatDialog) {
+      console.log(moment());
    }
 
   ngOnInit() {
