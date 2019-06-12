@@ -26,8 +26,8 @@ export class ProplanComponent implements OnInit {
   public myMlc = new FormControl();
   public isDatesVisible: boolean;
   public filteredProject: any;
-  public projectKickOfDate: String;
-  public softwareKickofDate: String;
+  public projectKickOfDate: Date;
+  public softwareKickofDate: string;
   public skDate = new FormControl();
   public pkDate = new FormControl();
 
@@ -49,7 +49,7 @@ export class ProplanComponent implements OnInit {
   // ];
   constructor(private proPlanService: ProplanService,
     public dialog: MatDialog) {
-      console.log(moment());
+      console.log(moment().add(15, 'days').format('DD-MM-YYYY'));
    }
 
   ngOnInit() {
@@ -80,10 +80,17 @@ export class ProplanComponent implements OnInit {
     });
   }
 
-  public editProject(){
+  public editProject() {
     this.filteredProject[0].freezeDate = this.projectKickOfDate;
     this.filteredProject[0].releaseDate = this.softwareKickofDate;
-    this.filteredProject[0].startupChecklist.masterPlanDueDate = '2019-08-01';
+    this.filteredProject[0].startupChecklist.masterPlanDueDate = moment(this.projectKickOfDate).add(14, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.softwareFunctionListDueDate = moment(this.projectKickOfDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.softwareDefinitionDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.vdsDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.teamMembersDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.dgDQNumbersDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
+
+
     this.proPlanService.editProject(this.filteredProject[0], this.filteredProject[0]._id).subscribe(checkList =>{
 
       this.startUpChecklist = checkList.startupChecklist;
@@ -102,7 +109,7 @@ export class ProplanComponent implements OnInit {
   }
 
   changePKDate(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.projectKickOfDate = event.value.toDateString();
+    this.projectKickOfDate = event.value;
   }
 
   changeSWKDate(type: string, event: MatDatepickerInputEvent<Date>) {

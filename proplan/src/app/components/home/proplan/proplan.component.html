@@ -84,12 +84,43 @@
               <h4 class="h4fontcolor">Project Startup Phase</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-       <div fxLayout="row" fxLayoutGap="20px">
+         <div fxLayout="row" fxLayoutGap="20px">
             Master Plan DueDate: {{startUpChecklist?.masterPlanDueDate}}
         </div>
         <div fxLayout="row" fxLayoutGap="20px">
             Master Plan Completed: {{startUpChecklist?.masterPlanCompleted}}
         </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Software Function List Available: {{startUpChecklist?.softwareFunctionListAvailable}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Software Function List DueDate: {{startUpChecklist?.softwareFunctionListDueDate}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          System Definition Available: {{startUpChecklist?.systemDefinitionAvailable}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          System Definition DueDate: {{startUpChecklist?.softwareDefinitionDueDate}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Availblity of Vehicle data sheet (VDS): {{startUpChecklist?.vdsAvailable}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Availblity of Vehicle data sheet (VDS) DueDate: {{startUpChecklist?.vdsDueDate}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Team Members Available: {{startUpChecklist?.teamMembersAvailable}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Team Members Available DueDate: {{startUpChecklist?.teamMembersDueDate}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Availblity of project DG and DQ numbers for the projects: {{startUpChecklist?.dgDQNumbersAvailable}}
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+          Availblity of project DG and DQ numbers for the projects DueDate: {{startUpChecklist?.dgDQNumbersDueDate}}
+        </div>
+
     </mat-expansion-panel>
 </div>
 
