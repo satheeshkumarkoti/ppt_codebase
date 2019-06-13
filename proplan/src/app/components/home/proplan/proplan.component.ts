@@ -81,6 +81,7 @@ export class ProplanComponent implements OnInit {
   }
 
   public editProject() {
+    // have to create new variables in Mongo DB to store projectKickOfDate, softwareKickofDate
     this.filteredProject[0].freezeDate = this.projectKickOfDate;
     this.filteredProject[0].releaseDate = this.softwareKickofDate;
     this.filteredProject[0].startupChecklist.masterPlanDueDate = moment(this.projectKickOfDate).add(14, 'days').format('DD-MM-YYYY');
@@ -89,7 +90,25 @@ export class ProplanComponent implements OnInit {
     this.filteredProject[0].startupChecklist.vdsDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
     this.filteredProject[0].startupChecklist.teamMembersDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
     this.filteredProject[0].startupChecklist.dgDQNumbersDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
-
+    this.filteredProject[0].startupChecklist.schedulePreparationDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.newProjectIdDueDate =
+    moment(this.projectKickOfDate).add(7, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.resourceEstimationDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.mks1ProjectIdDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.mks3ProjectFolderDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.mks3ProjectSheetDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.newParameterSetDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.newConfigurationSetDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.newEepromLayoutDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklist.softwareStatusDueDate =
+    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
 
     this.proPlanService.editProject(this.filteredProject[0], this.filteredProject[0]._id).subscribe(checkList =>{
 
