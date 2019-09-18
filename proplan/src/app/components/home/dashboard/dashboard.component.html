@@ -1,0 +1,96 @@
+<div class="heading-div" fxLayout="row" fxLayoutAlign="space-between center">
+  Standard View
+  <button>Add Project</button>
+</div>
+<div fxLayout="column" >
+<div class="calender-div" fxLayout="row" fxLayoutAlign="space-between center">
+  Calendar View
+  <button>Add Project</button>
+</div>
+<!-- <mat-paginator fxFlex="80" fxLayoutAlign="end center" [pageSizeOptions]="[10, 25, 50, 100]"
+          showFirstLastButtons></mat-paginator> -->
+<table mat-table [dataSource]="projectList" matSort style="width:100%" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="pName">
+    <th mat-header-cell *matHeaderCellDef  class="mat-column-username"> Name </th>
+    <td mat-cell *matCellDef="let element"  class="mat-column-username"> {{element.projectName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sName">
+    <th mat-header-cell *matHeaderCellDef> SWPM </th>
+    <td mat-cell *matCellDef="let element"> {{element.swpmName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="relNo">
+      <th mat-header-cell *matHeaderCellDef> Release No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.releaseNo}} </td>
+   </ng-container>
+<!--
+  <ng-container matColumnDef="sChecklist">
+    <th mat-header-cell *matHeaderCellDef> Startup </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-chip class="mat-chip" [color]="element.startupChecklistObject.startUpPhaseStatus" selected >
+        Startup Checklist
+      </mat-chip>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rfP">
+    <th mat-header-cell *matHeaderCellDef> Requirement Freeze </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-chip [color]="element.requirementFreezePhaseObject.requirementFreezePhaseStatus" selected >
+          Requirement Freeze
+      </mat-chip>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="siP">
+    <th mat-header-cell *matHeaderCellDef> SW Implementation </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-chip [color]="element.softwareImplementationObject.softwareImplementationPhaseStatus" selected >
+          SW Implementation
+      </mat-chip>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bspf">
+      <th mat-header-cell *matHeaderCellDef> Before SW PreFreeze </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip [color]="element.beforeSoftwarePreFreezeObject.beforeSoftwarePreFreezeStatus" selected >
+            Before SW PreFreeze
+        </mat-chip>
+      </td>
+    </ng-container>
+-->
+<ng-container matColumnDef="bsf">
+    <th mat-header-cell *matHeaderCellDef> Before SW Freeze </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-chip [color]="element.beforeSoftwareFreezeObject.beforeSoftwareFreezeStatus" selected >
+          Before SW Freeze
+      </mat-chip>
+    </td>
+  </ng-container>
+
+  <!--
+  <ng-container matColumnDef="bsr">
+      <th mat-header-cell *matHeaderCellDef> Before SW Release </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip [color]="element.beforeSWReleaseObjectObject.beforeSWReleaseStatus" selected >
+            Before SW Release
+        </mat-chip>
+      </td>
+  </ng-container>
+
+  <ng-container matColumnDef="asr">
+      <th mat-header-cell *matHeaderCellDef> After SW Release </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-chip [color]="element.afterSWReleaseChecklistObject.afterSWReleaseStatus" selected >
+            After SW Release
+        </mat-chip>
+      </td>
+  </ng-container>
+-->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>

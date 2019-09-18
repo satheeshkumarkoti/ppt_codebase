@@ -42,10 +42,10 @@ th.mat-sort-header-sorted {
   padding: 20px;
    .btn {
      background-color: #ffa500;
-     .icon {
-      // font-size: 40px;
+    //  .icon {
+    //   // font-size: 40px;
 
-     }
+    //  }
    }
 }
 
@@ -76,4 +76,10 @@ th.mat-sort-header-sorted {
   margin-block-end: 1.33em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
+  }
+
+  .calPadding {
+    padding: 5px !important;
+    // border: black;
+    border:groove 6px orange;
   }

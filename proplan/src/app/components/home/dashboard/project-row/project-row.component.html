@@ -1,0 +1,10 @@
+<tr>
+<td>{{project?.projectName}}</td>
+<td>{{project?.swpmName}}</td>
+<td><mat-chip-list aria-label="Checklist Selection">
+    <mat-chip *ngFor="let checklist of availableColors" [ngStyle]="{ backgroundColor : checklist?.color}">
+        {{checklist.name}}
+    </mat-chip>
+    </mat-chip-list>
+</td>
+</tr>

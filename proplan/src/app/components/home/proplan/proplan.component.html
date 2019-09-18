@@ -1,10 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="start space-around" class="container">
    <div class="action-menu" fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start end">
-    <!-- <button mat-button (click)="openDialog('add')" class="btn">
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <mat-icon class="icon">add</mat-icon> Add Project
-      </div>
-    </button> -->
 
     <form class="project-search-form"
       fxLayout="row"
@@ -20,24 +15,14 @@
         #auto="matAutocomplete">
             <mat-option
               *ngFor="let project of projects"
-              [value]="project">
-              {{project}}
+              [value]="project?.projectName">
+              {{project?.projectName}}
             </mat-option>
         </mat-autocomplete>
       </mat-form-field>
       <mat-form-field class="form-field"
         *ngIf="isMlcsVisible">
-        <!-- <mat-select [(value)]="selectedMlc">
-          <mat-option
-            *ngFor="let selectMlcData of mlcs"
-            [value]="selectMlcData"
-            (onSelectionChange)='dummy($event)'>
-            {{selectMlcData?.releaseType}}
-          </mat-option>
-        </mat-select> -->
-
-
-        <input
+      <input
         type="text"
         placeholder="Select a MLC"
         aria-label="selectedMlcData" matInput
@@ -48,8 +33,8 @@
           <mat-option
             *ngFor="let selectMlcData of mlcs"
             [id]="selectMlcData.id"
-            [value]="selectMlcData.releaseType">
-            {{selectMlcData.releaseType}}
+            [value]="selectMlcData.releaseType+'/'+ selectMlcData.releaseNo">
+            {{selectMlcData.releaseType +'/'+ selectMlcData.releaseNo}}
           </mat-option>
       </mat-autocomplete>
 
@@ -84,102 +69,50 @@
               <h4 class="h4fontcolor">Project Startup Phase</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-         <div fxLayout="row" fxLayoutGap="20px">
-            Master Plan DueDate: {{startUpChecklist?.masterPlanDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Master Plan Completed: {{startUpChecklist?.masterPlanCompleted}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Software Function List Available: {{startUpChecklist?.softwareFunctionListAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Software Function List DueDate: {{startUpChecklist?.softwareFunctionListDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          System Definition Available: {{startUpChecklist?.systemDefinitionAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          System Definition DueDate: {{startUpChecklist?.softwareDefinitionDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Availblity of Vehicle data sheet (VDS): {{startUpChecklist?.vdsAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Availblity of Vehicle data sheet (VDS) DueDate: {{startUpChecklist?.vdsDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Team Members Available: {{startUpChecklist?.teamMembersAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Team Members Available DueDate: {{startUpChecklist?.teamMembersDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Availblity of project DG and DQ numbers for the projects : {{startUpChecklist?.dgDQNumbersAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Software Schedule Preparation Available : {{startUpChecklist?.schedulePreparationAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Software Schedule Preparation DueDate : {{startUpChecklist?.schedulePreparationDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Request for New ProjectId Available : {{startUpChecklist?.newProjectIdAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Request for New ProjectId Available DueDate : {{startUpChecklist?.newProjectIdDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Resource Estimation (RAM/ROM/Runtime) : {{startUpChecklist?.resourceEstimationAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Resource Estimation (RAM/ROM/Runtime) Duedate : {{startUpChecklist?.resourceEstimationDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Trigger the creation of mks1 project Id : {{startUpChecklist?.mks1ProjectIdAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Trigger the creation of mks1 project Id DueDate: {{startUpChecklist?.mks1ProjectIdDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Trigger the creation of mks1 project folder : {{startUpChecklist?.mks3ProjectFolderAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Trigger the creation of mks1 project folder DueDate: {{startUpChecklist?.mks3ProjectFolderDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Trigger the creation of mks1 project sheet : {{startUpChecklist?.mks3ProjectSheetAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Trigger the creation of mks1 project sheet DueDate: {{startUpChecklist?.mks3ProjectSheetDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Creation of new parameter-set : {{startUpChecklist?.newParameterSetAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Creation of new parameter-set DueDate: {{startUpChecklist?.newParameterSetDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Creation of new configuration-set : {{startUpChecklist?.newConfigurationSetAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Creation of new configuration-set DueDate: {{startUpChecklist?.newConfigurationSetDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Creation of new eeprom layout and data-set : {{startUpChecklist?.newEepromLayoutAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Creation of new eeprom layout and data-set DueDate: {{startUpChecklist?.newEepromLayoutDueDate}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Software Status Available : {{startUpChecklist?.softwareStatusAvailable}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-          Software Status Available DueDate: {{startUpChecklist?.softwareStatusDueDate}}
-        </div>
+     <table mat-table [dataSource]="startUpChecklist" class="mat-elevation-z8 matTable">
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+        <ng-container matColumnDef="dueDate">
+            <th mat-header-cell *matHeaderCellDef> DueDate </th>
+            <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+        </ng-container>
 
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell  *matCellDef="let element">
+            <div>
 
-    </mat-expansion-panel>
+            <select matNativeControl required>
+              <option value="open">Open</option>
+              <option value="close">Close</option>
+              <option value="notApplicable">Not applicable</option>
+            </select>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mksOppLocation">
+          <th mat-header-cell *matHeaderCellDef >MKS/Opp Location</th>
+          <td mat-cell  *matCellDef="let element">
+            <div class="calPadding">
+              <textarea class="txtarea" matInput [(ngModel)]="element.mksOppLocation"></textarea>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="linksComments">
+          <th mat-header-cell *matHeaderCellDef >Links/Comments</th>
+          <td mat-cell  *matCellDef="let element">
+            <div class="calPadding">
+              <textarea class="txtarea" matInput [(ngModel)]="element.linksComments"></textarea>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+     </table>
+   </mat-expansion-panel>
 </div>
 
 <div class="release-details" fxLayout="column" *ngIf="isChecklistsVisible" >
@@ -189,12 +122,47 @@
               <h4 class="h4fontcolor">Requirement Freeze</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Availability Of Requirement SpecificationList: {{reqFreezeChecklist?.availabilityOfReqSpecificationList}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Availability Creation Of PCDS For CVT Tests: {{reqFreezeChecklist?.availability_CreationOfPCDSForCVTTests}}
-        </div>
+        <table mat-table [dataSource]="reqFreezeChecklist" class="mat-elevation-z8 matTable">
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef> DueDate </th>
+                <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status</th>
+                <td mat-cell *matCellDef="let element">
+                        <div>
+                        <select matNativeControl required>
+                          <option value="open">Open</option>
+                          <option value="close">Close</option>
+                          <option value="notApplicable">Not applicable</option>
+                        </select>
+                        </div>
+                      </td>
+            </ng-container>
+            <ng-container matColumnDef="mksOppLocation">
+              <th mat-header-cell *matHeaderCellDef>MKS/Opp Location</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.mksOppLocation"></textarea>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="linksComments">
+              <th mat-header-cell *matHeaderCellDef>Links/Comments</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.linksComments"></textarea>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
     </mat-expansion-panel>
 </div>
 
@@ -205,12 +173,40 @@
               <h4 class="h4fontcolor">Software Implementation</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Software implementation starts with Trunk/Mainline: {{swImplementationChecklist?.swImplStartsWithTrunk_Mainline}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Creation of devpath for the MLC-xx release: {{swImplementationChecklist?.creationOfDevpathForTheMLC50Release}}
-        </div>
+        <table mat-table [dataSource]="swImplementationChecklist" class="mat-elevation-z8 matTable">
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef> DueDate </th>
+                <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status (Open/Close/Not applicable)</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mksOppLocation">
+              <th mat-header-cell *matHeaderCellDef >MKS/Opp Location</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.mksOppLocation"></textarea>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="linksComments">
+              <th mat-header-cell *matHeaderCellDef >Links/Comments</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.linksComments"></textarea>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
     </mat-expansion-panel>
 </div>
 
@@ -221,12 +217,40 @@
               <h4 class="h4fontcolor">Before MLC-xx Software Pre-Freeze</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Customer parts number check: {{beforeSWPreFreezeChecklist?.customerPartsNumberCheck}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Global configuration check: {{beforeSWPreFreezeChecklist?.globalConfigurationCheck}}
-        </div>
+        <table mat-table [dataSource]="beforeSWPreFreezeChecklist" class="mat-elevation-z8 matTable">
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef> DueDate </th>
+                <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status (Open/Close/Not applicable)</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mksOppLocation">
+              <th mat-header-cell *matHeaderCellDef >MKS/Opp Location</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.mksOppLocation"></textarea>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="linksComments">
+              <th mat-header-cell *matHeaderCellDef >Links/Comments</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.linksComments"></textarea>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
     </mat-expansion-panel>
 </div>
 
@@ -237,12 +261,41 @@
               <h4 class="h4fontcolor">Before MLC-xx Software Freeze</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutGap="20px">
-            SAFE status check for software freeze: {{beforeSWFreezeChecklist?.safeStatusCheckForSoftwareFreeze}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Customer drawings, if any: {{beforeSWFreezeChecklist?.customerDrawingsIfAny}}
-        </div>
+
+        <table mat-table [dataSource]="beforeSWFreezeChecklist" class="mat-elevation-z8 matTable">
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef> DueDate </th>
+                <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status (Open/Close/Not applicable)</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mksOppLocation">
+              <th mat-header-cell *matHeaderCellDef >MKS/Opp Location</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.mksOppLocation"></textarea>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="linksComments">
+              <th mat-header-cell *matHeaderCellDef >Links/Comments</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.linksComments"></textarea>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
     </mat-expansion-panel>
 </div>
 
@@ -253,24 +306,40 @@
               <h4 class="h4fontcolor">Before MLC-xx Software Release</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutGap="20px">
-            SAFE status check for software release: {{beforeSWReleaseChecklist?.safeStatusCheckForSoftwareRelease}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Final software release version: {{beforeSWReleaseChecklist?.finalSoftwareReleaseVersion}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            ReleaseSheet/ReleaseSheetASW: {{beforeSWReleaseChecklist?.releaseSheet_releaseSheetASW}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            CVT / Vehicle test results: {{beforeSWReleaseChecklist?.cvt_vehicleTestResults}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            ReleaseSheet/ReleaseSheetASW: {{beforeSWReleaseChecklist?.releaseSheet_releaseSheetASW}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Release agenda file: {{beforeSWReleaseChecklist?.releaseAgendaFile}}
-        </div>
+        <table mat-table [dataSource]="beforeSWReleaseChecklist" class="mat-elevation-z8 matTable">
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef> DueDate </th>
+                <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status (Open/Close/Not applicable)</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mksOppLocation">
+              <th mat-header-cell *matHeaderCellDef >MKS/Opp Location</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.mksOppLocation"></textarea>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="linksComments">
+              <th mat-header-cell *matHeaderCellDef >Links/Comments</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.linksComments"></textarea>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
     </mat-expansion-panel>
 </div>
 
@@ -281,30 +350,42 @@
               <h4 class="h4fontcolor">After MLC-xx SW Release</h4>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div fxLayout="row" fxLayoutGap="20px">
-            OPP System Phase Definition Sign Off: {{afterSWReleaseChecklist?.oppSystemPhaseDefinitionSignOff}}
-        </div>
-        <div fxLayout="row" fxLayoutGap="20px">
-            Final software release version: {{afterSWReleaseChecklist?.systemReleaseCheckList}}
-        </div>
+
+        <table mat-table [dataSource]="afterSWReleaseChecklist" class="mat-elevation-z8 matTable">
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef> Description </th>
+              <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef> DueDate </th>
+                <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status (Open/Close/Not applicable)</th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="mksOppLocation">
+              <th mat-header-cell *matHeaderCellDef >MKS/Opp Location</th>
+              <td mat-cell  *matCellDef="let element">
+                <div class="calPadding">
+                  <textarea class="txtarea" matInput [(ngModel)]="element.mksOppLocation"></textarea>
+                </div>
+              </td>
+            </ng-container>
+
+              <ng-container matColumnDef="linksComments">
+                <th mat-header-cell *matHeaderCellDef >Links/Comments</th>
+                <td mat-cell  *matCellDef="let element">
+                  <div class="calPadding">
+                    <textarea class="txtarea" matInput [(ngModel)]="element.linksComments"></textarea>
+                  </div>
+                </td>
+              </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+         </table>
     </mat-expansion-panel>
 </div>
-
-
-
-  <!-- <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start space-around" class="container">
-    <mat-table #table [dataSource]="projectsList" matSort class="mat-elevation-z8">
-      <ng-container matColumnDef="projectName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</th>
-        <td mat-cell *matCellDef="let element"> {{element.projectName}} </td>
-      </ng-container>
-     <ng-container matColumnDef="releaseType">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>MLC</th>
-        <td mat-cell *matCellDef="let element"> {{element.releaseType}} </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showProjectDetails(row)"></tr>
-    </mat-table>
-  </div> -->
 
 </div>

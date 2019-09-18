@@ -10,6 +10,7 @@ import { CreatewizardComponent } from '../project/createwizard/createwizard.comp
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import { ICommonChecklist } from '../ICommonChecklist';
 
 @Component({
   selector: 'app-proplan',
@@ -26,8 +27,8 @@ export class ProplanComponent implements OnInit {
   public myMlc = new FormControl();
   public isDatesVisible: boolean;
   public filteredProject: any;
-  public projectKickOfDate: Date;
-  public softwareKickofDate: string;
+  public projectKickOffDate: Date;
+  public softwareKickOffDate: Date;
   public skDate = new FormControl();
   public pkDate = new FormControl();
 
@@ -41,6 +42,15 @@ export class ProplanComponent implements OnInit {
 
 
   public isChecklistsVisible: boolean;
+
+  public displayedColumns: string[] = [
+    'description',
+    'dueDate',
+    'status',
+    'mksOppLocation',
+    'linksComments'
+  ];
+
   // sortedData: IProject[];
 
   // public displayedColumns: string[] = [
@@ -49,7 +59,7 @@ export class ProplanComponent implements OnInit {
   // ];
   constructor(private proPlanService: ProplanService,
     public dialog: MatDialog) {
-      console.log(moment().add(15, 'days').format('DD-MM-YYYY'));
+      // console.log(moment().add(15, 'days').format('DD-MM-YYYY'));
    }
 
   ngOnInit() {
@@ -60,15 +70,14 @@ export class ProplanComponent implements OnInit {
     this.proPlanService.getAllProjects().subscribe(
       response => {
         this.projects = response;
-        // this.projectsList = new MatTableDataSource<IProject>(response);
-        // this.projectsList = response;
-        // this.sortedData = this.projectsList.slice();
+        console.log(this.projects);
       });
   }
 
-  public getMlcs(selectedProjectId: String){
+  public getMlcs(selectedProjectId: String) {
     this.proPlanService.getMlcs(selectedProjectId).subscribe(mlcs => {
       this.mlcs = mlcs;
+      console.log('mlcs' + this.mlcs + 'selectedProjectId ' + selectedProjectId.toString);
       this.isMlcsVisible = this.mlcs && this.mlcs.length > 0;
     });
   }
@@ -77,62 +86,109 @@ export class ProplanComponent implements OnInit {
     this.proPlanService.getProject(data).subscribe(project => {
       this.isDatesVisible = !!(project);
       this.filteredProject = project;
+      if (this.filteredProject[0].userStatus) {
+        this.isChecklistsVisible = true;
+       }
     });
+
   }
 
   public editProject() {
     // have to create new variables in Mongo DB to store projectKickOfDate, softwareKickofDate
-    this.filteredProject[0].freezeDate = this.projectKickOfDate;
-    this.filteredProject[0].releaseDate = this.softwareKickofDate;
-    this.filteredProject[0].startupChecklist.masterPlanDueDate = moment(this.projectKickOfDate).add(14, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.softwareFunctionListDueDate = moment(this.projectKickOfDate).format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.softwareDefinitionDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.vdsDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.teamMembersDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.dgDQNumbersDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.schedulePreparationDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.newProjectIdDueDate =
-    moment(this.projectKickOfDate).add(7, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.resourceEstimationDueDate =  moment(this.projectKickOfDate).format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.mks1ProjectIdDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.mks3ProjectFolderDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.mks3ProjectSheetDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.newParameterSetDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.newConfigurationSetDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.newEepromLayoutDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
-    this.filteredProject[0].startupChecklist.softwareStatusDueDate =
-    moment(this.projectKickOfDate).add(21, 'days').format('DD-MM-YYYY');
 
-    this.proPlanService.editProject(this.filteredProject[0], this.filteredProject[0]._id).subscribe(checkList =>{
+    this.filteredProject[0].freezeDate = this.projectKickOffDate;
+    this.filteredProject[0].releaseDate = this.softwareKickOffDate;
+    this.filteredProject[0].projectKickOffDate = this.projectKickOffDate;
+    this.filteredProject[0].softwareKickOffDate = this.softwareKickOffDate;
+// it shold be startupChecklistObject.checklist instead of startupChecklistObject.startUpChecklistObject
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[0].dueDate
+    = moment(new Date(this.projectKickOffDate)).add(14, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[1].dueDate
+    = moment(this.projectKickOffDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[2].dueDate
+    = moment(this.projectKickOffDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[3].dueDate
+    = moment(this.projectKickOffDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[4].dueDate
+    = moment(this.projectKickOffDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[5].dueDate
+    = moment(this.projectKickOffDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[6].dueDate
+    = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[7].dueDate
+    = moment(this.projectKickOffDate).add(7, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[8].dueDate
+    = moment(this.projectKickOffDate).format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[9].dueDate
+    = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[10].dueDate
+    = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[11].dueDate
+     = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[12].dueDate
+     = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[13].dueDate
+     = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[14].dueDate
+     = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[15].dueDate
+    = moment(this.projectKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[16].dueDate
+     = moment(this.softwareKickOffDate).add(42, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[17].dueDate
+     = moment(this.softwareKickOffDate).add(14, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[18].dueDate
+     = moment(this.softwareKickOffDate).add(14, 'days').format('DD-MM-YYYY');
+    this.filteredProject[0].startupChecklistObject.startUpChecklist[19].dueDate
+     = moment(this.softwareKickOffDate).add(21, 'days').format('DD-MM-YYYY');
+    const startUpChecklistEndDate = moment(this.softwareKickOffDate).add(42, 'days');
 
-      this.startUpChecklist = checkList.startupChecklist;
-      this.reqFreezeChecklist = checkList.reqFreezeChecklist;
-      this.swImplementationChecklist = checkList.swImplementationChecklist;
-      this.beforeSWPreFreezeChecklist = checkList.beforeSWPreFreezeChecklist;
-      this.beforeSWFreezeChecklist = checkList.beforeSWFreezeChecklist;
-      this.beforeSWReleaseChecklist = checkList.beforeSWReleaseChecklist;
-      this.afterSWReleaseChecklist = checkList.afterSWReleaseChecklist;
+    const startUpChecklistColor =  startUpChecklistEndDate.diff(moment(), 'days') >= 0 ? '#00ff00' : '#ff0000' ;
+    this.filteredProject[0].startupChecklistObject.startUpPhaseStatus = startUpChecklistColor;
+
+    this.proPlanService.editProject(this.filteredProject[0], this.filteredProject[0]._id).subscribe(checkList => {
+      console.log(checkList.startupChecklistObject);
+//  this.swEReleaseWPList = new MatTableDataSource<ISWEReleaseWP>(swEReleaseWPs);
+      this.startUpChecklist = new MatTableDataSource<ICommonChecklist>(checkList.startupChecklistObject.startUpChecklist);
+      // requirementFreezePhaseObject
+      this.filteredProject[0].requirementFreezePhaseObject.requirementFreezePhase[0].dueDate
+      = moment(this.projectKickOffDate).add(60, 'days').format('DD-MM-YYYY');
+      this.filteredProject[0].requirementFreezePhaseObject.requirementFreezePhase[1].dueDate
+      = moment(this.softwareKickOffDate).add(56, 'days').format('DD-MM-YYYY');
+      this.filteredProject[0].requirementFreezePhaseObject.requirementFreezePhase[2].dueDate
+      = moment(this.projectKickOffDate).format('DD-MM-YYYY');
+      this.filteredProject[0].requirementFreezePhaseObject.requirementFreezePhase[3].dueDate
+      = moment(this.softwareKickOffDate).add(56, 'days').format('DD-MM-YYYY');
+      this.filteredProject[0].requirementFreezePhaseObject.requirementFreezePhase[4].dueDate
+      = moment(this.softwareKickOffDate).add(42, 'days').format('DD-MM-YYYY');
+      const requirementFreezePhaseColor =  startUpChecklistEndDate.diff(moment(), 'days') >= 0 ? '#00ff00' : '#ff0000' ;
+      this.filteredProject[0].requirementFreezePhaseObject.requirementFreezePhaseStatus = requirementFreezePhaseColor;
+      this.reqFreezeChecklist = new MatTableDataSource<ICommonChecklist>(checkList.requirementFreezePhaseObject.requirementFreezePhase);
+      console.log(checkList.requirementFreezePhaseObject);
+
+
+      this.swImplementationChecklist = new MatTableDataSource<ICommonChecklist>
+      (checkList.softwareImplementationObject.softwareImplementationPhase);
+      this.beforeSWPreFreezeChecklist = new MatTableDataSource<ICommonChecklist>
+      (checkList.beforeSoftwarePreFreezeObject.beforeSoftwarePreFreeze);
+      this.beforeSWFreezeChecklist = new MatTableDataSource<ICommonChecklist>
+      (checkList.beforeSoftwareFreezeObject.beforeSoftwareFreezeObject);
+      this.beforeSWReleaseChecklist = new MatTableDataSource<ICommonChecklist>(checkList.beforeSWReleaseObjectObject.beforeSWReleaseObject);
+      this.afterSWReleaseChecklist = new MatTableDataSource<ICommonChecklist>(checkList.afterSWReleaseChecklistObject.afterSWReleaseObject);
 
       // TODO have to give valide condition for below boolean value
       this.isChecklistsVisible = true;
-      console.log(this.startUpChecklist.masterPlanDueDate);
+      // console.log(this.filteredProject[0]);
     });
-
   }
 
+  // private method
   changePKDate(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.projectKickOfDate = event.value;
+    this.projectKickOffDate = event.value;
   }
 
   changeSWKDate(type: string, event: MatDatepickerInputEvent<Date>) {
-    this.softwareKickofDate = event.value.toDateString();
+    this.softwareKickOffDate = event.value;
   }
 
   // public openDialog(): void {

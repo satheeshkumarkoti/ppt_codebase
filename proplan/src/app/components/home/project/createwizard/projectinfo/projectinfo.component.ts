@@ -14,7 +14,7 @@ export class ProjectinfoComponent implements OnInit {
   public projectForm = this.fb.group({
     // projectId: ['', Validators.required],
     projectName: [''],
-    // customer: [''],    
+    // customer: [''],
     // system: [''],
     // mksProjectId: [''],
     // swpm: ['', Validators.required],

@@ -9,7 +9,7 @@ export interface IProject {
     // mksProjectId: string;
     // swpm: string;
     // releaseskz: string;
-    // release_no: string;
+    releaseNo: string;
     releaseType: string;
     // mlc_code: string;
     // release_date: Date;
